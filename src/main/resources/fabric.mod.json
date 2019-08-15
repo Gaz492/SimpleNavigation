@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "simplenavigator",
+  "version": "${version}",
+
+  "name": "Simple Navigator",
+  "description": "Shows the Coords and direction your looking at on the screen",
+  "authors": [
+    "Gaz"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "uk.gaz492.simplenavigator.SimpleNavigator"
+    ]
+  },
+  "mixins": [
+    "simplenavigator.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

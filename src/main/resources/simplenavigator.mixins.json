@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "uk.gaz492.simplenavigator.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "HudMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "ScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
