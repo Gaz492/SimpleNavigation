@@ -5,13 +5,17 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
+import uk.gaz492.simplenavigator.SimpleNavigator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static net.minecraft.client.gui.DrawableHelper.fill;
 
 public class NavigatorHud {
+
+    private static final Random RAND = new Random();
 
     public static void render() {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -21,8 +25,13 @@ public class NavigatorHud {
         String horizontalFacing = client.player.getHorizontalFacing().toString();
         int textWidthMax = 0;
 
-        textList.add(String.format(Formatting.GOLD + "X: %s | Y: %s | Z: %s", clientPos.getX(), clientPos.getY(), clientPos.getZ()));
-        textList.add(String.format(Formatting.GOLD + "Direction: %s", horizontalFacing.substring(0, 1).toUpperCase() + horizontalFacing.substring(1)));
+        if(!client.options.debugEnabled){
+            textList.add(String.format(Formatting.GOLD + "X: %s | Y: %s | Z: %s", clientPos.getX(), clientPos.getY(), clientPos.getZ()));
+            textList.add(String.format(Formatting.GOLD + "Direction: %s", horizontalFacing.substring(0, 1).toUpperCase() + horizontalFacing.substring(1)));
+            if (canSlimeSpawnAt(clientPos.getX(), clientPos.getZ(), SimpleNavigator.seed) && SimpleNavigator.seed != 0) {
+                textList.add(Formatting.DARK_GREEN + "Slime Chunk");
+            }
+        }
 
         for (int i = 0; i < textList.size(); ++i) {
             String text = textList.get(i);
@@ -53,5 +62,21 @@ public class NavigatorHud {
                 fontRenderer.drawWithShadow(text, textPosX, textPosY, 0);
             }
         }
+
+    }
+
+    public static boolean canSlimeSpawnAt(int posX, int posZ, long worldSeed) {
+        return canSlimeSpawnInChunk(posX >> 4, posZ >> 4, worldSeed);
+    }
+
+    public static boolean canSlimeSpawnInChunk(int chunkX, int chunkZ, long worldSeed) {
+        long slimeSeed = 987234911L;
+        long rngSeed = worldSeed +
+                (long) (chunkX * chunkX * 4987142) + (long) (chunkX * 5947611) +
+                (long) (chunkZ * chunkZ) * 4392871L + (long) (chunkZ * 389711) ^ slimeSeed;
+
+        RAND.setSeed(rngSeed);
+
+        return RAND.nextInt(10) == 0;
     }
 }
