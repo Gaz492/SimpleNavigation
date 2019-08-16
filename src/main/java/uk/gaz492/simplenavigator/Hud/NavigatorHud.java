@@ -36,7 +36,7 @@ public class NavigatorHud {
                     int boxPosLeft = client.window.getScaledWidth() - (textWidthMax) - 15; // Right
                     int boxPosTop = 2;
                     int boxPosRight = boxPosLeft + textWidthMax + 10;
-                    int boxPosBottom = 30;
+                    int boxPosBottom = 15 + 15 * i;
 
                     fill(boxPosLeft, boxPosTop, boxPosRight, boxPosBottom, client.options.getTextBackgroundColor(-2147483648));
                 }
