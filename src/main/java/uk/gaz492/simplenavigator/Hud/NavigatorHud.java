@@ -42,7 +42,7 @@ public class NavigatorHud {
                 }
                 if (i + 1 == textList.size()) {
 //                    int boxPosLeft = client.window.getScaledWidth() / 2 - (textWidthMax / 2) - 5; // Center
-                    int boxPosLeft = client.window.getScaledWidth() - (textWidthMax) - 15; // Right
+                    int boxPosLeft = client.getWindow().getScaledWidth() - (textWidthMax) - 15; // Right
                     int boxPosTop = 2;
                     int boxPosRight = boxPosLeft + textWidthMax + 10;
                     int boxPosBottom = 15 + 15 * i;
@@ -57,7 +57,7 @@ public class NavigatorHud {
             if (!Strings.isNullOrEmpty(text)) {
                 int textWidth = fontRenderer.getStringWidth(text);
 //                float textPosX = (float) client.window.getScaledWidth() / 2 - ((float) textWidth / 2); // Center
-                float textPosX = (float) client.window.getScaledWidth() - 10 - ((float) textWidth); // Right
+                float textPosX = (float) client.getWindow().getScaledWidth() - 10 - ((float) textWidth); // Right
                 float textPosY = 5 + 14 * i;
                 fontRenderer.drawWithShadow(text, textPosX, textPosY, 0);
             }
